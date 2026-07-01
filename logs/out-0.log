@@ -14,3 +14,5 @@ bot is running!
 bot is running!
 ◇ injected env (3) from .env // tip: ⌘ suppress logs { quiet: true }
 bot is running!
+◇ injected env (3) from .env // tip: ⌘ override existing { override: true }
+bot is running!
