@@ -1,7 +1,7 @@
 require("dotenv").config();
 
+const axios = require("axios");
 const { App } = require("@slack/bolt");
-
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   appToken: process.env.SLACK_APP_TOKEN,
@@ -41,3 +41,29 @@ Orca AI Image (generate an image with Orca): /orca-ai-image
   await app.start();
   console.log("bot is running!");
 })();
+
+app.command("/orca-catfact", async ({ ack, respond }) => {
+  await ack();
+
+  try {
+    const response = await axios.get("https://catfact.ninja/fact");
+    await respond({ text: `Cat Fact:\n${response.data.fact}` });
+  } catch (err) {
+    await respond({ text: "Failed to fetch a cat fact." });
+  }
+});
+app.command("/orca-joke", async ({ ack, respond }) => {
+  await ack();
+
+  try {
+    const response = await axios.get("https://official-joke-api.appspot.com/random_joke");
+    await respond({
+      text:
+`${response.data.setup}
+
+${response.data.punchline}`
+    });
+  } catch (err) {
+    await respond({ text: "Failed to fetch a joke." });
+  }
+});
