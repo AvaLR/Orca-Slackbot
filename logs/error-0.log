@@ -1,0 +1,26 @@
+[WARN]  socket-mode:SlackWebSocket:1 A pong wasn't received from the server before the timeout of 5000ms!
+APOD Error: Request failed with status code 403
+APOD Error: Request failed with status code 403
+APOD Error: Request failed with status code 403
+APOD Error: Request failed with status code 403
+APOD Error: Request failed with status code 403
+APOD Error: Request failed with status code 403
+APOD Error Status: 403
+APOD Error Data: {
+  error: {
+    code: 'API_KEY_INVALID',
+    message: 'An invalid api_key was supplied. Get one at https://api.nasa.gov:443'
+  }
+}
+APOD Error Message: Request failed with status code 403
+APOD Error Status: 403
+APOD Error Data: {
+  error: {
+    code: 'API_KEY_INVALID',
+    message: 'An invalid api_key was supplied. Get one at https://api.nasa.gov:443'
+  }
+}
+APOD Error Message: Request failed with status code 403
+APOD Error Status: 503
+APOD Error Data: upstream connect error or disconnect/reset before headers. retried and the latest reset reason: connection timeout
+APOD Error Message: Request failed with status code 503
