@@ -87,16 +87,26 @@ app.command("/orca-apod", async ({ ack, respond }) => {
         api_key: process.env.NASA_API_KEY
       }
     });
+    
     await respond({
-      text: `Astronomy Picture of the Day:\n${response.data.title}\n\n${response.data.explanation}`,
-      attachments: [
+      blocks: [
         {
-          image_url: response.data.url
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `*${response.data.title}*\n\n${response.data.explanation}`
+          }
+        },
+        {
+          type: "image",
+          image_url: response.data.url,
+          alt_text: response.data.title
         }
       ]
     });
   } catch (err) {
-    await respond({ text: "Failed to fetch the Astronomy Picture of the Day." });
+    console.error("APOD Error:", err.message);
+    await respond({ text: `Failed to fetch APOD: ${err.message}` });
   }
 });
 // Everything above this line should be registered before starting the app
