@@ -19,3 +19,22 @@ app.command("/orca-ping", async ({ command, ack, respond }) => {
   await app.start();
   console.log("bot is running!");
 })();
+app.command("/orca-help", async ({ ack, respond }) => {
+  await ack();
+  await respond({
+    text:
+`- Available Commands -
+Validation Commands:
+Orca Ping (make sure Orca is online): /orca-ping
+Orca Help (get a list of available commands): /orca-help
+
+Random API Commands:
+Orca Cat Fact: /orca-catfact
+Coding Joke: /orca-codingjoke
+
+AI Commands:
+Orca AI (ask Orca a question): /orca-ai
+Orca AI Image (generate an image with Orca): /orca-ai-image
+`
+  });
+});
