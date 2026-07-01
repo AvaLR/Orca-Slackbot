@@ -27,11 +27,9 @@ Orca Help (get a list of available commands): /orca-help
 
 Random API Commands:
 Orca Cat Fact: /orca-catfact
-Coding Joke: /orca-codingjoke
-
-AI Commands:
-Orca AI (ask Orca a question): /orca-ai
-Orca AI Image (generate an image with Orca): /orca-ai-image
+Orca Dog Fact: /orca-dogfact
+Orca Joke: /orca-joke
+Orca Astronomy Picture of the Day: /orca-apod
 `
   });
 });
@@ -47,7 +45,7 @@ app.command("/orca-catfact", async ({ ack, respond }) => {
   }
 });
 
-app.command("/orca-codingjoke", async ({ ack, respond }) => {
+app.command("/orca-joke", async ({ ack, respond }) => {
   await ack();
 
   try {
@@ -62,8 +60,44 @@ ${response.data.punchline}`
     await respond({ text: "Failed to fetch a joke." });
   }
 });
+app.command("/orca-dogfact", async ({ ack, respond }) => {
+  await ack();
 
-// Start the app after all handlers are registered
+  try {
+    const response = await axios.get("https://dog-api.kinduff.com/api/facts");
+    const dogFact = response.data.facts ? response.data.facts[0] : response.data[0];
+    await respond({ text: `Dog Fact:\n${dogFact}` });
+  } catch (err) {
+    await respond({ text: "Failed to fetch a dog fact." });
+  }
+});
+app.command("/orca-apod", async ({ ack, respond }) => {
+  await ack();
+
+  if (!process.env.NASA_API_KEY) {
+    await respond({ text: "NASA API key not configured. Please set NASA_API_KEY in .env" });
+    return;
+  }
+
+  try {
+    const response = await axios.get("https://api.nasa.gov/planetary/apod", {
+      params: {
+        api_key: process.env.NASA_API_KEY
+      }
+    });
+    await respond({
+      text: `Astronomy Picture of the Day:\n${response.data.title}\n\n${response.data.explanation}`,
+      attachments: [
+        {
+          image_url: response.data.url
+        }
+      ]
+    });
+  } catch (err) {
+    await respond({ text: "Failed to fetch the Astronomy Picture of the Day." });
+  }
+});
+// Everything above this line should be registered before starting the app
 (async () => {
   await app.start();
   console.log("bot is running!");
