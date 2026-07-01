@@ -8,6 +8,7 @@ const app = new App({
   socketMode: true
 });
 
+// Register all command handlers BEFORE starting the app
 app.command("/orca-ping", async ({ command, ack, respond }) => {
   const start = Date.now();
   await ack();
@@ -15,10 +16,6 @@ app.command("/orca-ping", async ({ command, ack, respond }) => {
   await respond({ text: `Pong!\nLatency: ${latency}ms` });
 });
 
-(async () => {
-  await app.start();
-  console.log("bot is running!");
-})();
 app.command("/orca-help", async ({ ack, respond }) => {
   await ack();
   await respond({
@@ -38,3 +35,9 @@ Orca AI Image (generate an image with Orca): /orca-ai-image
 `
   });
 });
+
+// Start the app after all handlers are registered
+(async () => {
+  await app.start();
+  console.log("bot is running!");
+})();
