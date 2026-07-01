@@ -36,12 +36,6 @@ Orca AI Image (generate an image with Orca): /orca-ai-image
   });
 });
 
-// Start the app after all handlers are registered
-(async () => {
-  await app.start();
-  console.log("bot is running!");
-})();
-
 app.command("/orca-catfact", async ({ ack, respond }) => {
   await ack();
 
@@ -52,7 +46,8 @@ app.command("/orca-catfact", async ({ ack, respond }) => {
     await respond({ text: "Failed to fetch a cat fact." });
   }
 });
-app.command("/orca-joke", async ({ ack, respond }) => {
+
+app.command("/orca-codingjoke", async ({ ack, respond }) => {
   await ack();
 
   try {
@@ -67,3 +62,9 @@ ${response.data.punchline}`
     await respond({ text: "Failed to fetch a joke." });
   }
 });
+
+// Start the app after all handlers are registered
+(async () => {
+  await app.start();
+  console.log("bot is running!");
+})();
