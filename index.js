@@ -13,12 +13,13 @@ app.command("/orca-ping", async ({ command, ack, respond }) => {
   const start = Date.now();
   await ack();
   const latency = Date.now() - start;
-  await respond({ text: `Pong!\nLatency: ${latency}ms` });
+  await respond({ response_type: 'in_channel', text: `Pong!\nLatency: ${latency}ms` });
 });
 
 app.command("/orca-help", async ({ ack, respond }) => {
   await ack();
   await respond({
+    response_type: 'in_channel',
     text:
 `- Available Commands -
 Validation Commands:
@@ -39,9 +40,9 @@ app.command("/orca-catfact", async ({ ack, respond }) => {
 
   try {
     const response = await axios.get("https://catfact.ninja/fact");
-    await respond({ text: `Cat Fact:\n${response.data.fact}` });
+    await respond({ response_type: 'in_channel', text: `Cat Fact:\n${response.data.fact}` });
   } catch (err) {
-    await respond({ text: "Failed to fetch a cat fact." });
+    await respond({ response_type: 'in_channel', text: "Failed to fetch a cat fact." });
   }
 });
 
@@ -51,13 +52,14 @@ app.command("/orca-joke", async ({ ack, respond }) => {
   try {
     const response = await axios.get("https://official-joke-api.appspot.com/random_joke");
     await respond({
+      response_type: 'in_channel',
       text:
 `${response.data.setup}
 
 ${response.data.punchline}`
     });
   } catch (err) {
-    await respond({ text: "Failed to fetch a joke." });
+    await respond({ response_type: 'in_channel', text: "Failed to fetch a joke." });
   }
 });
 app.command("/orca-dogfact", async ({ ack, respond }) => {
@@ -68,9 +70,9 @@ app.command("/orca-dogfact", async ({ ack, respond }) => {
       params: { limit: 1 }
     });
     const dogFact = response.data.facts[0];
-    await respond({ text: `Dog Fact:\n${dogFact}` });
+    await respond({ response_type: 'in_channel', text: `Dog Fact:\n${dogFact}` });
   } catch (err) {
-    await respond({ text: "Failed to fetch a dog fact." });
+    await respond({ response_type: 'in_channel', text: "Failed to fetch a dog fact." });
   }
 });
 app.command("/orca-apod", async ({ ack, respond }) => {
@@ -92,6 +94,7 @@ app.command("/orca-apod", async ({ ack, respond }) => {
     });
     
     await respond({
+      response_type: 'in_channel',
       blocks: [
         {
           type: "section",
@@ -111,7 +114,7 @@ app.command("/orca-apod", async ({ ack, respond }) => {
     console.error("APOD Error Status:", err.response?.status);
     console.error("APOD Error Data:", err.response?.data);
     console.error("APOD Error Message:", err.message);
-    await respond({ text: `Failed to fetch APOD: ${err.message}` });
+    await respond({ response_type: 'in_channel', text: `Failed to fetch APOD: ${err.message}` });
   }
 });
 // Everything above this line should be registered before starting the app
