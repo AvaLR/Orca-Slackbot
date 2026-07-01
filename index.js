@@ -64,8 +64,10 @@ app.command("/orca-dogfact", async ({ ack, respond }) => {
   await ack();
 
   try {
-    const response = await axios.get("https://dog-api.kinduff.com/api/facts");
-    const dogFact = response.data.facts ? response.data.facts[0] : response.data[0];
+    const response = await axios.get("https://dogapi.dog/api/v1/facts", {
+      params: { limit: 1 }
+    });
+    const dogFact = response.data.facts[0];
     await respond({ text: `Dog Fact:\n${dogFact}` });
   } catch (err) {
     await respond({ text: "Failed to fetch a dog fact." });
