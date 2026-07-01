@@ -16,3 +16,10 @@ bot is running!
 bot is running!
 ◇ injected env (3) from .env // tip: ⌘ override existing { override: true }
 bot is running!
+Using NASA API key: your-nasa-...
+Using NASA API key: your-nasa-...
+◇ injected env (3) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+bot is running!
+Using NASA API key: DEMO_KEY...
+◇ injected env (3) from .env // tip: ⌘ enable debugging { debug: true }
+bot is running!

@@ -5,3 +5,19 @@ APOD Error: Request failed with status code 403
 APOD Error: Request failed with status code 403
 APOD Error: Request failed with status code 403
 APOD Error: Request failed with status code 403
+APOD Error Status: 403
+APOD Error Data: {
+  error: {
+    code: 'API_KEY_INVALID',
+    message: 'An invalid api_key was supplied. Get one at https://api.nasa.gov:443'
+  }
+}
+APOD Error Message: Request failed with status code 403
+APOD Error Status: 403
+APOD Error Data: {
+  error: {
+    code: 'API_KEY_INVALID',
+    message: 'An invalid api_key was supplied. Get one at https://api.nasa.gov:443'
+  }
+}
+APOD Error Message: Request failed with status code 403
