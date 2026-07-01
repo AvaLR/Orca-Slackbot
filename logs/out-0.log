@@ -2,3 +2,15 @@
 bot is running!
 ◇ injected env (2) from .env // tip: ⌘ enable debugging { debug: true }
 bot is running!
+◇ injected env (2) from .env // tip: ⌘ override existing { override: true }
+bot is running!
+◇ injected env (2) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+bot is running!
+◇ injected env (3) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+bot is running!
+◇ injected env (3) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+bot is running!
+◇ injected env (3) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+bot is running!
+◇ injected env (3) from .env // tip: ⌘ suppress logs { quiet: true }
+bot is running!
