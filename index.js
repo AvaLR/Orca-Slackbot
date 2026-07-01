@@ -82,9 +82,12 @@ app.command("/orca-apod", async ({ ack, respond }) => {
   }
 
   try {
+    const apiKey = process.env.NASA_API_KEY.trim();
+    console.log("Using NASA API key:", apiKey.substring(0, 10) + "...");
+    
     const response = await axios.get("https://api.nasa.gov/planetary/apod", {
       params: {
-        api_key: process.env.NASA_API_KEY
+        api_key: apiKey
       }
     });
     
@@ -105,7 +108,9 @@ app.command("/orca-apod", async ({ ack, respond }) => {
       ]
     });
   } catch (err) {
-    console.error("APOD Error:", err.message);
+    console.error("APOD Error Status:", err.response?.status);
+    console.error("APOD Error Data:", err.response?.data);
+    console.error("APOD Error Message:", err.message);
     await respond({ text: `Failed to fetch APOD: ${err.message}` });
   }
 });
